@@ -5,5 +5,5 @@ output "server_details" {
       private_ip                        = v.private_ip
     }
   }
-  description = "Details of the created Xen Server"
+  description = "Details of the created KVM Server"
 }
