@@ -1,10 +1,7 @@
 
 # DOC : https://registry.terraform.io/providers/NaverCloudPlatform/ncloud/latest/docs
 
-
-
-
-####################################### NETWORK #######################################
+####################################### INIT #######################################
 ############################
 ##          Main          ##
 ############################
@@ -38,15 +35,15 @@ variable support_vpc {
     default = "true" #VPC
     #default = "false" #Classic
 }
-
+####################################### NETWORK #######################################
 
 ############################
 ##           VPC          ##
 ############################
 
 module "vpc" {
-  source = "../../modules/vpc"
-
+  #source = "../../modules/vpc"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/vpc"
   vpc = {
     test1 = {
       name = "test1"
@@ -65,7 +62,8 @@ module "vpc" {
 ############################
 
 module "nacl" {
-  source = "../../modules/nacl"
+  #source = "../../modules/nacl"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/nacl"
 
   nacl = {
     test1-nacl = {
@@ -87,7 +85,8 @@ module "nacl" {
 ############################
 
 module "subnet" {
-  source = "../../modules/subnet"
+  #source = "../../modules/subnet"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/subnet"
 
   subnet = {
     test1-subnet-pub = {
@@ -194,7 +193,8 @@ module "subnet" {
 ############################
 
 module "nat-gateway" {
-  source = "../../modules/nat-gateway"
+  #source = "../../modules/nat-gateway"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/nat-gateway"
 
   nat-gateway = {
     test1-nat-gateway = {
@@ -218,7 +218,8 @@ module "nat-gateway" {
 ##     NAT Route Table    ##
 ############################
 module "nat-route-table" {
-    source = "../../modules/nat-route-table"
+    #source = "../../modules/nat-route-table"
+    source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/nat-route-table"
 
     nat-route-table = {
         test1-nat-route-table = {
@@ -248,7 +249,8 @@ module "nat-route-table" {
 ############################
 
 module "acg" {
-  source = "../../modules/acg"
+  #source = "../../modules/acg"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/acg"
 
   acg = {
     test1-web = {
@@ -285,7 +287,8 @@ module "acg" {
 ############################
 
 module "acg_rules" {
-  source = "../../modules/acg-rule"
+  #source = "../../modules/acg-rule"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/acg-rule"
 
   acg-rule = {
     test1-web = {
@@ -337,7 +340,8 @@ module "acg_rules" {
 }
 
 module "pem-key" {
-  source = "../../modules/pem-key"
+  #source = "../../modules/pem-key"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/pem-key"
 
   key_name = "terraform-pem"
   
@@ -394,7 +398,7 @@ module "pem-key" {
 ### KVM
 # module "server" {
 #   source = "../../modules/server/kvm"
-
+#   source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/server/kvm"
 #   server = {
 #     test1-web = {
 #       subnet = "test1-subnet-pub"
@@ -450,7 +454,8 @@ module "pem-key" {
 # https://github.com/NaverCloudPlatform/terraform-ncloud-docs/blob/main/docs/server_image_product.md
 
 module "server" {
-  source = "../../modules/server/xen"
+  #source = "../../modules/server/xen"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/server/xen"
 
   server = {
     test1-web-server = {
@@ -512,7 +517,8 @@ module "server" {
 ############################
 
 module "block-storage" {
-  source = "../../modules/block-storage/xen"
+  #source = "../../modules/block-storage/xen"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/block-storage/xen"
 
   block-storage = {
     test1-web-block1 = {
@@ -538,7 +544,8 @@ module "block-storage" {
 ############################
 
 module "object-storage" {
-  source = "../../modules/object-storage"
+  #source = "../../modules/object-storage"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/object-storage"
 
   object-storage = {
     bucket-test1 = {
@@ -555,7 +562,8 @@ module "object-storage" {
 ############################
 
 module "nas-storage" {
-  source = "../../modules/nas-storage"
+  #source = "../../modules/nas-storage"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/nas-storage"
 
   nas-storage = {
     test1nas01 = {
@@ -573,7 +581,8 @@ module "nas-storage" {
 ############################
 
 module "lb" {
-  source = "../../modules/loadbalancer"
+  #source = "../../modules/loadbalancer"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/loadbalancer"
 
   lb = {
     test1-alb = {
@@ -592,7 +601,9 @@ module "lb" {
 ############################
 
 module "lb-tg" {
-  source = "../../modules/loadbalancer-target-group"
+  #source = "../../modules/loadbalancer-target-group"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/loadbalancer-target-group"
+  
 
   lb-tg = {
     test1-alb-http-80 = {
@@ -620,7 +631,8 @@ module "lb-tg" {
 ## LoadBalancer TG Attach ##
 ############################
 module "lb-tg-attach" {
-  source = "../../modules/loadbalancer-target-group-attachment"
+  #source = "../../modules/loadbalancer-target-group-attachment"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/loadbalancer-target-group-attachment"
 
   lb-tg-attach = {
     test1-alb-http-80 = {
@@ -636,7 +648,9 @@ module "lb-tg-attach" {
 ## LoadBalancer Listener  ##
 ############################
 module "lb-listener" {
-  source = "../../modules/loadbalancer-listener"
+  #source = "../../modules/loadbalancer-listener"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/loadbalancer-listener"
+
 
   lb-listener = {
     test1-alb = {
@@ -652,7 +666,8 @@ module "lb-listener" {
 
 ####################################### Naver Kubernetes Service #######################################
 module "nks-cluster" {
-  source = "../../modules/nks-cluster"
+  #source = "../../modules/nks-cluster"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/nks-cluster"
 
   nks-cluster = {
     terraform-nks ={
@@ -675,7 +690,8 @@ module "nks-cluster" {
 
 
 module "nks-nodepool" {
-  source = "../../modules/nks-nodepool"
+  #source = "../../modules/nks-nodepool"
+  source = "git::https://github.com/kosaf1996/ncp-terraform-module.git//modules/nks-nodepool"
 
   nks-nodepool = {
     nodepool1 = {
